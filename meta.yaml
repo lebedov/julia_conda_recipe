@@ -1,0 +1,22 @@
+# Recipe to package precompiled Julia release from https://julialang.org
+{% set build = 0 %}
+{% set version = "1.4.2" %}
+
+package:
+    name: julia
+    version: {{version}}
+
+about:
+    home: https://julialang.org
+    license: MIT
+    summary: Julia programming language (repackaged binaries from julialang.org)
+
+source:
+    url: https://julialang-s3.julialang.org/bin/linux/x64/1.4/julia-{{version}}-linux-x86_64.tar.gz # [x86_64]
+    sha256: d77311be23260710e89700d0b1113eecf421d6cf31a9cebad3f6bdd606165c28 # [x86_64]
+
+build:
+    number: {{build}}
+    script:
+        - find . -mindepth 1 -maxdepth 1 -type d -exec mv {} $PREFIX/ \;
+
